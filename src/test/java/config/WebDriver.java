@@ -5,6 +5,9 @@ import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WebDriver {
     public static WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
 
@@ -22,8 +25,13 @@ public class WebDriver {
 
         String remoteUrl = WebDriver.config.getRemoteUrl();
         if (remoteUrl != null) {
-            capabilities.setCapability("enableVNC", true);
-            capabilities.setCapability("enableVideo", true);
+            // Добавляем расширения Selenoid в секцию selenoid:options
+            Map<String, Object> selenoidOptions = new HashMap<>();
+            selenoidOptions.put("enableVNC", true);
+            selenoidOptions.put("enableVideo", true);
+
+            capabilities.setCapability("selenoid:options", selenoidOptions);
+
             Configuration.remote = WebDriver.config.getRemoteUrl();
         }
 

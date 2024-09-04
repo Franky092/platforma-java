@@ -27,7 +27,10 @@ out/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-!**/src/test/resources
+!**/src/test/resources/local.properties
+!**/src/test/resources/remote.properties
+.src/test/resources/remote.properties
+!**/src/test/resources/
 
 ### NetBeans ###
 /nbproject/private/
