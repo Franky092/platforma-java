@@ -16,7 +16,7 @@ public class auth extends TestBase{
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Авторизация под зарегистрированным пользователем, используя email")
     public void AuthLoginWithRegisteredUserUsingEmail() {
-        step("Вводи почты",() -> authPage.enterEmail());
+        step("Ввод почты",() -> authPage.enterEmail());
 //        authPage.enterEmail();
         authPage.enterPassword();
         authPage.clickRememberMe();
