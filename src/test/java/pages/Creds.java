@@ -1,6 +1,6 @@
 package pages;
 import org.aeonbits.owner.Config;
-@Config.Sources({"classpath:local.properties"})
+@Config.Sources({"classpath:remote.properties"})
 
 public interface Creds extends Config {
 

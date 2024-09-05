@@ -1,7 +1,7 @@
 package config;
 
 import org.aeonbits.owner.Config;
-@Config.Sources({"classpath:local.properties"})
+@Config.Sources({"classpath:remote.properties"})
 
 public interface WebDriverConfig extends Config {
     @Key("baseUrl")
