@@ -6,8 +6,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Condition.visible;
 
-import config.WebDriverConfig;
-import org.aeonbits.owner.Config;
+import config.Creds;
 import org.aeonbits.owner.ConfigFactory;
 
 
