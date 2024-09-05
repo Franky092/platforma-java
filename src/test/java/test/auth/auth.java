@@ -12,6 +12,7 @@ import pages.AuthPage;
 
 import helpers.TestBase;
 
+import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 
 public class auth extends TestBase{
@@ -29,6 +30,7 @@ public class auth extends TestBase{
         authPage.clickSignInButton();
 
         authPage.getMainPageHeader();
+
 
     }
 

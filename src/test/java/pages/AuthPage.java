@@ -6,7 +6,14 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Condition.visible;
 
+import config.WebDriverConfig;
+import org.aeonbits.owner.Config;
+import org.aeonbits.owner.ConfigFactory;
+
+
 public class AuthPage {
+
+    public static Creds config = ConfigFactory.create(Creds.class, System.getProperties());
 
     private final SelenideElement emailField = $("#username");
     private final SelenideElement passwordField = $("#password");
@@ -28,17 +35,17 @@ public class AuthPage {
 
     // Ввод email
     public void enterEmail() {
-        emailField.setValue(System.getenv("MAIN_EMAIL"));
+        emailField.setValue(config.MAIN_USERNAME());
     }
 
     // Ввод username
     public void enterUsername() {
-        emailField.setValue(System.getenv("MAIN_USERNAME"));
+        emailField.setValue(config.MAIN_USERNAME());
     }
 
     // Ввод пароля
     public void enterPassword() {
-        passwordField.setValue(System.getenv("MAIN_PASSWORD"));
+        passwordField.setValue(config.MAIN_PASSWORD());
     }
 
     // Клик по чекбоксу "Запомнить меня"

@@ -4,10 +4,10 @@ import org.aeonbits.owner.Config;
 
 public interface Creds extends Config {
 
-    @Key("mainUsername")
+    @Key("MAIN_USERNAME")
     String MAIN_USERNAME();
 
-    @Key("mainPassword")
+    @Key("MAIN_PASSWORD")
     String MAIN_PASSWORD();
 
 }
