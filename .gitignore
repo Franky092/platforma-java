@@ -29,9 +29,9 @@ bin/
 !**/src/test/**/bin/
 !**/src/test/resources/local.properties
 !**/src/test/resources/remote.properties
-.src/test/resources/remote.properties
-!**/src/test/resources/
-src/test/resources/remote.properties
+/src/test/resources/remote.properties
+
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
