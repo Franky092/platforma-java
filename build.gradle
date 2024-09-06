@@ -25,10 +25,14 @@ dependencies {
     testImplementation "org.aeonbits.owner:owner:${ownerVersion}"
     testImplementation "io.qameta.allure:allure-selenide:${allureVersion}"
     testImplementation "org.slf4j:slf4j-simple:2.0.13"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.10.0"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
     testImplementation "org.aspectj:aspectjrt:1.9.22" // Обновленная версия
     testImplementation "org.aspectj:aspectjweaver:1.9.22" // Обновленная версия
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.11.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.2'
+
 }
 
 test {

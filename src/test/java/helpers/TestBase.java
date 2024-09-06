@@ -1,10 +1,12 @@
 package helpers;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import config.WebDriver;
 import config.WebDriverConfig;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +17,8 @@ import static io.qameta.allure.Allure.step;
 public class TestBase {
     public static WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
 
-    @BeforeAll
-    static void openPage() {
+    @BeforeEach
+     void openPage() {
         step("Открыть главную страницу 'platforma'", () ->
                 open(config.getBaseUrl()));
     }
@@ -32,10 +34,12 @@ public class TestBase {
     }
 
     @AfterEach
-    void addAttachments() {
+    void tearDown() {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
+        Selenide.closeWebDriver(); // Закрытие браузера после каждого теста
+
     }
 }
