@@ -1,0 +1,64 @@
+###Plumbing Run for get operationId
+POST https://stage.api.platforma.build/plumbing/v1/Plumbing
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="ArchitectureFile"; filename="АР2-89364c20-3df3-46f7-b539-aeb567474b7e-ОМ.json"
+Content-Type: application/json
+
+--WebAppBoundary
+Content-Disposition: form-data; name="StructureFile"; filename="КР-304948cd-2ad4-4521-bd4b-c1d25b79fbcb-Объектная_модель.json"
+Content-Type: application/json
+
+--WebAppBoundary
+Content-Disposition: form-data; name="config";
+Content-Type: application/json
+
+{ "config": {
+  "ifcOptions": {
+    "withBuilding": false,
+    "storeyGenerationType": "WithTypicalStorey"
+  },
+  "calculationOptions": {
+    "riserCalculation": {
+      "k1CalculationOptions": {
+        "materialType": "PP"
+      },
+      "b2CalculationOptions": {
+        "fireRiserFlowSpeed": 0
+      }
+    }
+  },
+  "placingOptions": {
+    "virtualObjectPlacementOptions": {
+      "withConnectionPoints": true,
+      "withEngineeringOpenings": true
+    },
+    "devicePlacementOptions": {
+      "withCondensateFunnel": true,
+      "withFireCabinets": true,
+      "withK1SewerRisers": true,
+      "withK2SewerRisers": true
+    },
+    "areaPlacementOptions": {
+      "withK1Zones": true,
+      "withK2Zones": true,
+      "withFireCabinetsZones": true
+    }
+  },
+  "testingModeSettings": {
+    "enableTestingMode": false,
+    "b2TestingDto": {
+      "scenario": "InLluWithHVaC"
+    }
+  },
+  "withDebugData": true,
+  "withLoweringAreas": true,
+  "withManifoldAreas": true,
+  "riserMaterialTypeForManifoldCalculations": "PP",
+  "withEnteringAreas": true,
+  "shouldMergeSewerRiserInRestRooms": false
+} }
+###
+
+https://dev.api.platforma.build/plumbing/v1/plumbing/2a7688d6-9358-44fc-8cbf-c241a07b3688/File
