@@ -33,17 +33,16 @@ public class Hvac extends TestBase{
     // Добавляем метод источника данных
     static Stream<Arguments> topologiesProvider() {
         return Stream.of(
-                Arguments.of(Topologies.Num124),
-                Arguments.of(Topologies.Num128) // Пример других значений
+                Arguments.of(Topologies.Num124,List.of("Вариант 124-1-1-0")),
+                Arguments.of(Topologies.Num128,List.of("Вариант 128-1-1-0")) // Пример других значений
         );
     }
 
     @Owner("Maksim Sidelnikov")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("выбор 128 топологии")
-    @ParameterizedTest(name = "Выбран моп {0}")
+    @ParameterizedTest(name = "Проход до HVAC на Мопе{0} и {1}")
     @MethodSource("topologiesProvider")
-    void gotopologies(Topologies topologies) {
+    void goToHvac(Topologies topologies, List<String> variants) {
         step("Авторизация", () -> {
             step("Ввод Email", () -> {
                 authPage.enterEmail();
@@ -79,6 +78,26 @@ public class Hvac extends TestBase{
 
         step("Выбор топологии: " + topologies, () -> {
             topologiesPage.chooseTopologiess(topologies);
+        });
+
+        step("Выбор набора квартир ", () -> {
+            topologiesTreePage.chooseVariantApartment();
+        });
+
+        step("Выбор варианта расположения квартир ", () -> {
+            topologiesTreePage.chooseLocationVariantApartment();
+        });
+
+        step("Выбор доступных вариантов расположения квартир ", () -> {
+            topologiesTreePage.chooseVariants(variants);
+        });
+
+        step("Нажать на кнопку 'Просмотр варианта' ", () -> {
+            topologiesTreePage.clickButtonViewVariant();
+        });
+
+        step("Проверить, что мы перешли на страницу КЗ", () -> {
+            layoutPage.getTitle();
         });
     }
 }
