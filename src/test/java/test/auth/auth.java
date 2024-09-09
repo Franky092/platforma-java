@@ -17,7 +17,6 @@ public class auth extends TestBase{
     @DisplayName("Авторизация под зарегистрированным пользователем, используя email")
     public void AuthLoginWithRegisteredUserUsingEmail() {
         step("Ввод почты",() -> authPage.enterEmail());
-//        authPage.enterEmail();
         authPage.enterPassword();
         authPage.clickRememberMe();
         authPage.clickSignInButton();
