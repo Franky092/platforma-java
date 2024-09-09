@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class PortfolioPage {
 
 
-    private final SelenideElement portfolioCard = $("[automation-id='portfolio-list_item']:nth-of-type(2)");
+    private final SelenideElement portfolioCard = $x("//div[text()='Портфель для тестирования']");
     private final SelenideElement layoutOption = $(".cell__action.ng-star-inserted");
     private final SelenideElement topologies = $x("//span[text()='Форма МОП 128']");
 
