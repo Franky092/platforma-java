@@ -32,6 +32,7 @@ dependencies {
     testImplementation "org.aspectj:aspectjweaver:1.9.22" // Обновленная версия
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.11.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.2'
+    testImplementation 'com.codeborne:selenide-proxy:6.9.0'
 
 }
 

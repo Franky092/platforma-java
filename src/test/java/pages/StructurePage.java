@@ -21,6 +21,8 @@ public class StructurePage {
     private final SelenideElement buttonGeneration = $("div[data-appearance='primary'] span");
     private final SelenideElement variant = $("div.t-content div.content .props");
     private final SelenideElement buttonArchitectureTwo = $x("//button[text()=' АР 2 ']");
+    public SelenideElement structureTitle = $x("//div[text()=\"Задание КР 1\"]");
+
 
 
     public void getTitle(){
@@ -29,7 +31,6 @@ public class StructurePage {
 
     public void clickButtonNextModule(){
         buttonNextModule.shouldBe(visible, Duration.ofMinutes(6));
-        sleep(2000);
         buttonNextModule.click();
     }
 
@@ -49,6 +50,10 @@ public class StructurePage {
 
     public void clickVariant(){
         variant.shouldBe(visible, Duration.ofMinutes(6)).click();
+    }
+
+    public void checkStructureTitle() {
+        structureTitle.shouldBe(visible, Duration.ofMinutes(2));
     }
 
 

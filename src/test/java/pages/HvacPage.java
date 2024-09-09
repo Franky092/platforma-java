@@ -16,10 +16,10 @@ public class HvacPage {
     public SelenideElement hvacTitle = $x("//div[text()=\"Вариант ОВиК\"]");
 
     public void assertNoErrorDialogPresent() {
-        tuidialog.shouldNotBe(visible, Duration.ofMinutes(3));
+        tuidialog.shouldNotBe(visible, Duration.ofMinutes(2));
     }
 
     public void checkHvacTitle() {
-        hvacTitle.shouldBe(visible, Duration.ofMinutes(3));
+        hvacTitle.shouldBe(visible, Duration.ofMinutes(2));
     }
 }

@@ -16,6 +16,8 @@ public class WebDriver {
         Configuration.browser = WebDriver.config.getBrowserName();
         Configuration.browserVersion = WebDriver.config.getBrowserVersion();
         Configuration.browserSize = WebDriver.config.getBrowserSize();
+        Configuration.timeout = 30000;
+//        Configuration.downloadsFolder ="./build/downloads";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();

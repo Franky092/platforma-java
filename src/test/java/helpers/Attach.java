@@ -1,22 +1,41 @@
 package helpers;
 
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
+import com.codeborne.selenide.conditions.Visible;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 
-import static com.codeborne.selenide.Selenide.sessionId;
+import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.FileDownloadMode.FOLDER;
+import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.logging.LogType.BROWSER;
 
 
+
 public class Attach {
+    private static final SelenideElement om = $x("//div[text()='Объектная модель']");
+
+    public static void getJson() throws FileNotFoundException {
+        File report = om.download(DownloadOptions.using(FOLDER).withTimeout(60000));
+        String fileName = report.getName();
+        InputStream reportStream = new FileInputStream(report);
+        Allure.addAttachment(fileName,"application/octet-stream",reportStream, "json");
+    }
 
     @Attachment(value = "URL", type = "text/uri-list")
     public static String geturl() {
