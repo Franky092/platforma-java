@@ -17,6 +17,7 @@ public class WebDriver {
         Configuration.browserVersion = WebDriver.config.getBrowserVersion();
         Configuration.browserSize = WebDriver.config.getBrowserSize();
         Configuration.timeout = 30000;
+        Configuration.proxyEnabled = false;
 //        Configuration.downloadsFolder ="./build/downloads";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
