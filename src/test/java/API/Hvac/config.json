@@ -1,0 +1,84 @@
+{
+	"BuildingRotationAngle": 135,
+	"SmokeVentilationSharedAreas": {
+		"CalculationVariant": 1,
+		"SmokeExhaustAirDuctStandardSpeed": 20,
+		"CompensationAirDuctStandardSpeed": 15,
+		"SmokeExhaustValveStandardSpeed": 14,
+		"CompensationValveStandardSpeed": 10,
+		"BetweenSubZoneSideEdgeAndAirDuct": 100,
+		"BetweenSubZoneSideEdgeAndSmokeExhaustAirDuctForActuator": 250,
+		"BetweenSubZoneBackEdgeAndAirDuct": 100,
+		"BetweenEngineeringOpenings": 300
+	},
+	"SmokeVentilationSharedArea": {
+		"CalculationVariant": 1,
+		"SmokeExhaustAirDuctStandardSpeed": 20,
+		"CompensationAirDuctStandardSpeed": 15,
+		"SmokeExhaustValveStandardSpeed": 14,
+		"CompensationValveStandardSpeed": 10,
+		"BetweenSubZoneSideEdgeAndAirDuct": 100,
+		"BetweenSubZoneSideEdgeAndSmokeExhaustAirDuctForActuator": 250,
+		"BetweenSubZoneBackEdgeAndAirDuct": 100,
+		"BetweenEngineeringOpenings": 300
+	},
+	"TypicalStoreyRoomHeatLoss": {
+		"ApartmentFacadeWallHeatTransferCoefficient": 0.335,
+		"LluFacadeWallHeatTransferCoefficient": 0.335,
+		"WindowHeatTransferCoefficient": 1.524,
+		"InterApartmentDoorHeatTransferCoefficient": 1,
+		"InterRoomDoorHeatTransferCoefficient": 1
+	},
+	"DuctInsulations": {
+		"VerticalDuctApartmentVentilation": {
+			"Thickness": 5,
+			"FireResistanceLimit": "EI60"
+		},
+		"HorizontalDuctApartmentVentilationFromValveToWall": {
+			"Thickness": 5,
+			"FireResistanceLimit": "EI60"
+		},
+		"VerticalDuctInsideEngineeringZoneinSharedAreas": {
+			"Thickness": 5,
+			"FireResistanceLimit": "EI60"
+		},
+		"SmokeVentilationDuctsFromValveToFan": {
+			"Thickness": 5,
+			"FireResistanceLimit": "EI30"
+		},
+		"FireSafeZoneDucts": {
+			"Thickness": 5,
+			"FireResistanceLimit": "EI60"
+		}
+	},
+	"DuctInsulation": {
+		"VerticalDuctApartmentVentilation": {
+			"Thickness": 5,
+			"FireResistanceLimit": "EI60"
+		},
+		"HorizontalDuctApartmentVentilationFromValveToWall": {
+			"Thickness": 5,
+			"FireResistanceLimit": "EI60"
+		},
+		"VerticalDuctInsideEngineeringZoneinSharedAreas": {
+			"Thickness": 5,
+			"FireResistanceLimit": "EI60"
+		},
+		"SmokeVentilationDuctsFromValveToFan": {
+			"Thickness": 5,
+			"FireResistanceLimit": "EI30"
+		},
+		"FireSafeZoneDucts": {
+			"Thickness": 5,
+			"FireResistanceLimit": "EI60"
+		}
+	},
+	"DuctInsets":
+	{
+		"RoundDuctInsetLength": 95,
+		"RoundDuctInsetInsertionLength": 55,
+		"InsetSizeAddWithWallValve": 20,
+		"RectangleInsetStandardLength": 100,
+		"RectangleInsetMinimalLength": 50
+	}
+}

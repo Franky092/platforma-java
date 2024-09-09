@@ -1,6 +1,7 @@
 package helpers;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import config.WebDriver;
 import config.WebDriverConfig;
@@ -39,6 +40,7 @@ public class TestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
+        Attach.geturl();
         Selenide.closeWebDriver(); // Закрытие браузера после каждого теста
 
     }

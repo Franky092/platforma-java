@@ -59,6 +59,9 @@ Content-Type: application/json
   "withEnteringAreas": true,
   "shouldMergeSewerRiserInRestRooms": false
 } }
+
+
+
 ###
 
-https://dev.api.platforma.build/plumbing/v1/plumbing/2a7688d6-9358-44fc-8cbf-c241a07b3688/File
+GET https://dev.api.platforma.build/plumbing/v1/plumbing/2a7688d6-9358-44fc-8cbf-c241a07b3688/File

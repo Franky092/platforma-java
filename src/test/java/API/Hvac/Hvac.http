@@ -1,0 +1,17 @@
+### run HVAC
+POST https://stage.api.platforma.build/hvac/v1/hvac/run
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="ArchitectureFile"; filename="file/"
+Content-Type: application/json
+
+--WebAppBoundary
+Content-Disposition: form-data; name="StructureFile"; filename="file/"
+Content-Type: application/json
+
+--WebAppBoundary
+Content-Disposition: form-data; name="config"; filename="/"
+Content-Type: application/json
+
+###
