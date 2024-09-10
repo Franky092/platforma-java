@@ -1,6 +1,5 @@
 package test.hvac;
 import helpers.Attach;
-import io.qameta.allure.Allure;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.*;
 import io.qameta.allure.Severity;
@@ -10,12 +9,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import pages.*;
+import test.Topologies;
 
 
 import java.util.List;
 import java.util.stream.Stream;
 
-import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
 public class Hvac extends TestBase {
@@ -129,7 +128,7 @@ public class Hvac extends TestBase {
                     layoutPage.clickButtonSpacePlanning();
                 });
                 step("Проверить, что мы находимся в модуле ОПР", () -> {spaceplanningPage.checkSpacePlanningTitle();});
-                step("Скачать OМ-КР", Attach::getJson);
+                step("Скачать OМ-КР", Attach::getOm);
                 step("Нажать на кнопку передать вариант в модуль", () -> {
                     spaceplanningPage.clickButtonNextModule();
                 });
@@ -159,7 +158,7 @@ public class Hvac extends TestBase {
                             structurePage.clickButtonViewVariant();
                         });
                         step("Проверить, что мы находимся в модуле КР", () -> {structurePage.checkStructureTitle();});
-                        step("Скачать OМ-КР", Attach::getJson);
+                        step("Скачать OМ-КР", Attach::getOm);
                         step("Нажать на кнопку передать вариант в модуль", () -> {
                             structurePage.clickButtonNextModule();
                         });
@@ -170,7 +169,7 @@ public class Hvac extends TestBase {
                             structurePage.clickButtonArchitectureTwo();
                         });
                         step("Проверить, что мы находимся в модуле КР", () -> {architectureTwoPage.checkArchitectureTwoTitle();});
-                        step("Скачать OМ-АР2", Attach::getJson);
+                        step("Скачать OМ-АР2", Attach::getOm);
                         step("Нажать на кнопку передать вариант в модуль", () -> {
                             architectureTwoPage.clickButtonNextModule();
                         });
@@ -183,7 +182,7 @@ public class Hvac extends TestBase {
                 step("Проверяем, что мы находимся в модуле HVAC", () -> {
                     hvacPage.checkHvacTitle();
                 });
-                step("Скачать OМ-HVAC", Attach::getJson);
+                step("Скачать OМ-HVAC", Attach::getOm);
                 step("Проверяем, что нет ошибок", () -> {
                     hvacPage.assertNoErrorDialogPresent();
                 });

@@ -13,7 +13,8 @@ public class ArchitectureTwoPage {
     private final SelenideElement title = $x("//div[text()='Модели и расчёты']");
     private final SelenideElement buttonNextModule = $("div[data-appearance='primary'] span");
     private final SelenideElement buttonHvac = $x("//button[text()=' ОВиК ']");
-    public SelenideElement architectureTwoTitle = $x("//div[text()=\"Вариант АР 2\"]");
+    private final SelenideElement architectureTwoTitle = $x("//div[text()=\"Вариант АР 2\"]");
+    private final SelenideElement buttonPlumbing = $x("//button[text()='ВК']");
 
 
 
@@ -33,4 +34,5 @@ public class ArchitectureTwoPage {
     public void checkArchitectureTwoTitle() {
         architectureTwoTitle.shouldBe(visible, Duration.ofMinutes(2));
     }
+    public void clickButtonPlumbing() {buttonPlumbing.click();}
 }

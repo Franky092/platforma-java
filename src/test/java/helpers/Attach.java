@@ -18,18 +18,30 @@ import java.nio.charset.StandardCharsets;
 import static com.codeborne.selenide.FileDownloadMode.FOLDER;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.openqa.selenium.logging.LogType.BROWSER;
 
 
 
 public class Attach {
     private static final SelenideElement om = $x("//div[text()='Объектная модель']");
+    private static final SelenideElement diagnisticFloor = $x("//div[text()='Диагностический IFC (Этаж)']");
+    private static final SelenideElement diagnisticFloors = $x("//div[text()='Диагностический IFC (Здание)']");
 
-    public static void getJson() throws FileNotFoundException {
+
+
+    public static void getOm() throws FileNotFoundException {
         File report = om.download(DownloadOptions.using(FOLDER).withTimeout(60000));
         String fileName = report.getName();
         InputStream reportStream = new FileInputStream(report);
         Allure.addAttachment(fileName,"application/octet-stream",reportStream, "json");
+
+    }
+    public static void  getFloorIfc() throws FileNotFoundException {
+        File report = diagnisticFloor.download(DownloadOptions.using(FOLDER).withTimeout(60000));
+        assertThat(report)
+                .isNotEmpty();
+        Allure.addAttachment(report.getName(),"application/octet-stream", new FileInputStream(report), "json");
     }
 
     @Attachment(value = "URL", type = "text/uri-list")

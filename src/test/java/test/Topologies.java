@@ -1,4 +1,4 @@
-package test.hvac;
+package test;
 
 public enum Topologies {
     Num124("Форма МОП 124"),

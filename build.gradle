@@ -17,8 +17,8 @@ ext {
     ownerVersion = "1.0.12"
 }
 
-sourceCompatibility = '22'
-targetCompatibility = '22'
+sourceCompatibility = '21.0.4'
+targetCompatibility = '21.0.4'
 
 dependencies {
     testImplementation "com.codeborne:selenide:7.4.3"
@@ -33,6 +33,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.2'
     testImplementation 'com.codeborne:selenide-proxy:7.4.3'
     testImplementation("com.codeborne:selenide-selenoid:7.4.3")
+    testImplementation 'org.assertj:assertj-core:3.26.3'
 
 }
 
@@ -71,10 +72,4 @@ allure {
     }
 }
 
-compileJava {
-    options.encoding = 'UTF-8'
-}
 
-compileTestJava {
-    options.encoding = 'UTF-8'
-}

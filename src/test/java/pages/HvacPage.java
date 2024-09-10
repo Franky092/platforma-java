@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class HvacPage {
 
-    public final SelenideElement tuidialog = $("tui-dialog");
+    private final SelenideElement tuidialog = $("tui-dialog");
 
     public SelenideElement hvacTitle = $x("//div[text()=\"Вариант ОВиК\"]");
 
