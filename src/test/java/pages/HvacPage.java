@@ -1,12 +1,9 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.ElementsCollection;
 
 import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class HvacPage {

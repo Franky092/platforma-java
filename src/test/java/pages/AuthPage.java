@@ -1,15 +1,7 @@
 package pages;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.DownloadOptions;
 import com.codeborne.selenide.SelenideElement;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.Random;
-
-import static com.codeborne.selenide.FileDownloadMode.FOLDER;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Condition.visible;
