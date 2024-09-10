@@ -24,7 +24,7 @@ public class WebDriver {
         ChromeOptions chromeOptions = new ChromeOptions();
 
         chromeOptions.addArguments("--lang=en-en");
-       chromeOptions.addArguments("--headless");
+//        chromeOptions.addArguments("--headless");
 
         String remoteUrl = WebDriver.config.getRemoteUrl();
         if (remoteUrl != null) {
