@@ -14,7 +14,7 @@ public class ArchitectureTwoPage {
     private final SelenideElement buttonNextModule = $("div[data-appearance='primary'] span");
     private final SelenideElement buttonHvac = $x("//button[text()=' ОВиК ']");
     private final SelenideElement architectureTwoTitle = $x("//div[text()=\"Вариант АР 2\"]");
-    private final SelenideElement buttonPlumbing = $x("//button[text()='ВК']");
+    private final SelenideElement buttonPlumbing = $x("//button[text()=' ВК ']");
 
 
 
