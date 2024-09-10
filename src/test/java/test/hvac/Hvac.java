@@ -40,9 +40,22 @@ public class Hvac extends TestBase {
         // Добавляем метод источника данных
         static Stream<Arguments> topologiesProvider() {
             return Stream.of(
-//                    Arguments.of(Topologies.Num124, List.of("Вариант 124-1-1-0"))
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-1"))
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-0")) //Пример других значений
+                    Arguments.of(Topologies.Num124, List.of("Вариант 124-1-1-0"),List.of("1")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-0"),List.of("1")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-1"),List.of("1")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-2"),List.of("1")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-3"),List.of("1")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-0"),List.of("2")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-1"),List.of("2")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-2"),List.of("2")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-3"),List.of("2")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-0"),List.of("3")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-1"),List.of("3")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-2"),List.of("3")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-3"),List.of("3")),
+                    Arguments.of(Topologies.Num122, List.of("Вариант 122-1-1-0"),List.of("1")),
+                    Arguments.of(Topologies.Num126, List.of("Вариант 126-2-1-0"),List.of("1")),
+                    Arguments.of(Topologies.Num61, List.of("Вариант 61-1-1-0"))
             );
         }
 
@@ -51,7 +64,7 @@ public class Hvac extends TestBase {
         @DisplayName("Проход до HVAC")
         @ParameterizedTest(name = "на Мопе {0} и {1}")
         @MethodSource("topologiesProvider")
-        void goToHvac(Topologies topologies, List<String> variants) {
+        void goToHvac(Topologies topologies, List<String> variants, List<String> variantsApartment) {
             step("Авторизация", () -> {
                 step("Ввод Email", () -> {
                     authPage.enterEmail();
@@ -91,7 +104,7 @@ public class Hvac extends TestBase {
                         });
 
                         step("Выбор набора квартир ", () -> {
-                            topologiesTreePage.chooseVariantApartment();
+                            topologiesTreePage.chooseVariantApartment(variantsApartment);
                         });
 
                         step("Выбор варианта расположения квартир ", () -> {

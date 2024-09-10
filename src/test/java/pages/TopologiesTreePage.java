@@ -15,8 +15,10 @@ public class TopologiesTreePage {
     private final SelenideElement variant = $x("//span[text()='Вариант 128-1-1-0']");
     private final SelenideElement ButtonViewVariant = $x("//span[text()=' Просмотр варианта ']");
 
-    public void chooseVariantApartment() {
-        variantApartment.click();
+    public void chooseVariantApartment(List<String> variantsApartment) {
+        for (String variantApartment : variantsApartment) {
+            $x(String.format("//span[text()='Набор квартир' and text()=' %s ']", variantApartment)).click();
+        }
     }
 
     public void chooseLocationVariantApartment() {
