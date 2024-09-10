@@ -8,6 +8,7 @@ import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,7 +35,8 @@ public class Attach {
         File report = om.download(DownloadOptions.using(FOLDER).withTimeout(60000));
         String fileName = report.getName();
         InputStream reportStream = new FileInputStream(report);
-        Allure.addAttachment(fileName,"application/octet-stream",reportStream, "json");
+        Allure.addAttachment(report.getName(),"application/octet-stream", new FileInputStream(report), "json");
+
 
     }
     public static void  getFloorIfc() throws FileNotFoundException {

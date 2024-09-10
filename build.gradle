@@ -17,8 +17,8 @@ ext {
     ownerVersion = "1.0.12"
 }
 
-sourceCompatibility = '21.0.4'
-targetCompatibility = '21.0.4'
+sourceCompatibility = '22'
+targetCompatibility = '22'
 
 dependencies {
     testImplementation "com.codeborne:selenide:7.4.3"
