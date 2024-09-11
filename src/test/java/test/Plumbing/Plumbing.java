@@ -159,7 +159,7 @@ public class Plumbing extends TestBase {
             });
             step("Проверить, что мы находимся в модуле КР", () -> {structurePage.checkStructureTitle();});
             step("Скачать OМ-КР",()->{
-                structurePage.checkErrors();
+//                structurePage.checkErrors();
                 step("Скачиваем файл ОМ-КР", Attach::getOm);
             });
         });

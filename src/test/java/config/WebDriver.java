@@ -17,7 +17,7 @@ public class WebDriver {
         Configuration.browserVersion = WebDriver.config.getBrowserVersion();
         Configuration.browserSize = WebDriver.config.getBrowserSize();
         Configuration.proxyEnabled = false;
-        Configuration.timeout = 60000; // Таймаут для команд Selenide
+        Configuration.timeout = 30000; // Таймаут для команд Selenide
         Configuration.pageLoadTimeout = 300000; // Таймаут для загрузки страниц
         Configuration.pollingInterval = 2000; // Интервал проверки для явных ожиданий
 //        Configuration.downloadsFolder ="./build/downloads";

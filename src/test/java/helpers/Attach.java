@@ -3,6 +3,7 @@ package helpers;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.*;
 import com.codeborne.selenide.conditions.Visible;
+import com.codeborne.selenide.ex.FileNotDownloadedError;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import jdk.dynalink.beans.StaticClass;
@@ -17,6 +18,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
@@ -28,39 +30,91 @@ import static org.openqa.selenium.logging.LogType.BROWSER;
 
 public class Attach {
     private static final SelenideElement om = $x("//div[text()='Объектная модель']");
-    private static final SelenideElement pngs = $("[id*=downloadButton]");
     private static final SelenideElement diagnisticFloor = $x("//div[text()='Диагностический IFC (Этаж)']");
     private static final SelenideElement diagnisticFloors = $x("//div[text()='Диагностический IFC (Здание)']");
-    public static SelenideElement tuidialog = $("h3");
-    public static SelenideElement tuidialogclose = $("button.t-close");
-    static int retryCount = 0;
-    static int maxRetries = 5;
-    static boolean fileDownloaded = false;
+    public static final SelenideElement dialogCloseButton = $("button.t-close");
+    private static final int MAX_ATTEMPTS = 3;
 
-    public static void getOm() throws FileNotFoundException {
-        while (!fileDownloaded && retryCount < maxRetries) {
+    public static void getOm() throws FileNotDownloadedError {
+        int attempt = 0;
+        boolean fileDownload = false;
+        if (dialogCloseButton.is(visible, Duration.ofSeconds(5))) {
+            dialogCloseButton.click();
+        }
+        while (!fileDownload) {
+            attempt++;
             try {
-                File report = om.download(DownloadOptions.using(FOLDER).withTimeout(60000));
-                Allure.addAttachment(report.getName(), "application/octet-stream", new FileInputStream(report), "json");
-                fileDownloaded = true;
-            } catch (Error e) {
-                System.out.println("Can't download");
-            }
-            retryCount++;
-            if (retryCount >= maxRetries) {
-                throw new RuntimeException("EROOOOOOOOOOOOOOOOOOR");
+                File file = om.download(DownloadOptions.using(FOLDER).withTimeout(60000));
+                // Проверка, что файл не пустой
+                if (file.length() > 0) {
+                    Allure.addAttachment(file.getName(), "application/octet-stream", new FileInputStream(file), "json");
+                    fileDownload = true; // Файл успешно загружен и не пустой
+                } else {
+                    System.out.println("Файл пустой, пробуем снова...");
+                    file.delete(); // Удаляем пустой файл перед повторной попыткой
+                }
+            } catch (FileNotDownloadedError | FileNotFoundException e) {
+                System.out.println("Не удалось скачать файл");
+            };
+            if (attempt >= MAX_ATTEMPTS) {
+                throw new RuntimeException("Файл не удалось скачать после " + MAX_ATTEMPTS + " попыток.");
             }
         }
     }
 
-    public static void getFloorIfc() throws FileNotFoundException {
-        File report = diagnisticFloor.download(DownloadOptions.using(FOLDER).withTimeout(60000));
-        Allure.addAttachment(report.getName(), "application/octet-stream", new FileInputStream(report), "json");
+    public static void getFloorIfc() throws FileNotDownloadedError {
+        int attempt = 0;
+        boolean fileDownload = false;
+        if (dialogCloseButton.is(visible, Duration.ofSeconds(5))) {
+            dialogCloseButton.click();
+        }
+        while (!fileDownload) {
+            attempt++;
+            try {
+                File file = diagnisticFloor.download(DownloadOptions.using(FOLDER).withTimeout(30000));
+                // Проверка, что файл не пустой
+                if (file.length() > 0) {
+                    Allure.addAttachment(file.getName(), "application/octet-stream", new FileInputStream(file), "json");
+                    fileDownload = true; // Файл успешно загружен и не пустой
+                } else {
+                    System.out.println("Файл пустой, пробуем снова...");
+                    file.delete(); // Удаляем пустой файл перед повторной попыткой
+                    sleep(30000);
+                }
+            } catch (FileNotDownloadedError | FileNotFoundException e) {
+                System.out.println("Не удалось скачать файл");
+            };
+            if (attempt >= MAX_ATTEMPTS) {
+                throw new RuntimeException("Файл не удалось скачать после " + MAX_ATTEMPTS + " попыток.");
+            }
+        }
     }
-
-    public static void getFloorsIfc() throws FileNotFoundException {
-        File report = diagnisticFloors.download(DownloadOptions.using(FOLDER).withTimeout(60000));
-        Allure.addAttachment(report.getName(), "application/octet-stream", new FileInputStream(report), "json");
+    public static void getFloorsIfc() throws FileNotDownloadedError {
+        int attempt = 0;
+        boolean fileDownload = false;
+        if (dialogCloseButton.is(visible, Duration.ofSeconds(5))) {
+            dialogCloseButton.click();
+        }
+        while (!fileDownload) {
+            attempt++;
+            try {
+                File file = diagnisticFloors.download(DownloadOptions.using(FOLDER).withTimeout(30000));
+                // Проверка, что файл не пустой
+                if (file.length() > 0) {
+                    Allure.addAttachment(file.getName(), "application/octet-stream", new FileInputStream(file), "json");
+                    fileDownload = true; // Файл успешно загружен и не пустой
+                } else {
+                    System.out.println("Файл пустой, пробуем снова...");
+                    file.delete(); // Удаляем пустой файл перед повторной попыткой
+                    sleep(30000);
+                }
+            } catch (FileNotDownloadedError | FileNotFoundException e) {
+                System.out.println("Не удалось скачать файл");
+            };
+            if (attempt >= MAX_ATTEMPTS) {
+                throw new RuntimeException("Файл не удалось скачать после " + MAX_ATTEMPTS + " попыток.");
+            }
+        }
     }
 
     @Attachment(value = "URL", type = "text/uri-list")
