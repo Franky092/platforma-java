@@ -181,9 +181,13 @@ public class Plumbing extends TestBase {
             step("Нажать на кнопку передать вариант в модуль", () -> {
                 architectureTwoPage.clickButtonNextModule();
             });
+            step("Выбрать ВК", () -> {
+                architectureTwoPage.clickButtonPlumbing();
+            });
             step("Проверить, что мы находимся в модуле ВК", () -> {
                 plumbingPage.chekTitilePlumbing();
             });
+
             step("Скачать ОМ-ВК", Attach::getOm);
             step("Скачать IFC Этаж-ВК", Attach::getFloorIfc);
             step("Скачать IFC Здания-ВК", Attach::getFloorsIfc);
