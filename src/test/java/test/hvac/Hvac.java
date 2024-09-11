@@ -33,10 +33,6 @@ public class Hvac extends TestBase {
     ArchitectureTwoPage architectureTwoPage = new ArchitectureTwoPage();
     HvacPage hvacPage = new HvacPage();
 
-
-    @Nested
-    class HvacTests {
-
         // Добавляем метод источника данных
         static Stream<Arguments> topologiesProvider() {
             return Stream.of(
@@ -59,137 +55,136 @@ public class Hvac extends TestBase {
             );
         }
 
-        @Owner("Maksim Sidelnikov")
-        @Severity(SeverityLevel.NORMAL)
-        @DisplayName("Проход до HVAC")
-        @ParameterizedTest(name = "на Мопе {0} и {1}, набор квартир {2}")
-        @MethodSource("topologiesProvider")
-        void goToHvac(Topologies topologies, List<String> variants, List<String> variantsApartment) {
-            step("Авторизация", () -> {
-                step("Ввод Email", () -> {
-                    authPage.enterEmail();
-                });
-                step("Ввод пароля", () -> {
-                    authPage.enterPassword();
-                });
-
-                step("Нажатие на чекбокс 'Запомнить меня'", () -> {
-                    authPage.clickRememberMe();
-                });
-
-                step("Нажатие на кнопку 'Войти'", () -> {
-                    authPage.clickSignInButton();
-                });
+    @Owner("Maksim Sidelnikov")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Проход до HVAC")
+    @ParameterizedTest(name = "на Мопе {0} и {1}, набор квартир {2}")
+    @MethodSource("topologiesProvider")
+    void goToHvac(Topologies topologies, List<String> variants, List<String> variantsApartment) {
+        step("Авторизация", () -> {
+            step("Ввод Email", () -> {
+                authPage.enterEmail();
+            });
+            step("Ввод пароля", () -> {
+                authPage.enterPassword();
             });
 
-            step("Выбор портфеля", () -> {
-                portfolioPage.enterPortfolio();
+            step("Нажатие на чекбокс 'Запомнить меня'", () -> {
+                authPage.clickRememberMe();
             });
 
-            step("Переход к проекту Сидельников", () -> {
-                projectsPage.goToProjectSidelnikov();
+            step("Нажатие на кнопку 'Войти'", () -> {
+                authPage.clickSignInButton();
+            });
+        });
+
+        step("Выбор портфеля", () -> {
+            portfolioPage.enterPortfolio();
+        });
+
+        step("Переход к проекту Сидельников", () -> {
+            projectsPage.goToProjectSidelnikov();
+        });
+
+        step ("Переход к модулю КЗ", () -> {
+            step("Выбор планировки", () -> {
+                projectPage.chooseLayout();
             });
 
-            step ("Переход к модулю КЗ", () -> {
-                step("Выбор планировки", () -> {
-                    projectPage.chooseLayout();
-                });
-
-                step("Выбор опции планировки", () -> {
-                    layoutsPage.chooseLayoutOption();
-                });
-
-                step("Выбор топологии: " + topologies, () -> {
-                    topologiesPage.chooseTopologiess(topologies);
-                });
-
-                step("Выбор набора квартир ", () -> {
-                    topologiesTreePage.chooseVariantApartment(variantsApartment);
-                });
-
-                step("Выбор варианта расположения квартир ", () -> {
-                    topologiesTreePage.chooseLocationVariantApartment();
-                });
-
-                step("Выбор доступных вариантов расположения квартир ", () -> {
-                    topologiesTreePage.chooseVariants(variants);
-                });
-
-                step("Нажать на кнопку 'Просмотр варианта' ", () -> {
-                    topologiesTreePage.clickButtonViewVariant();
-                });
+            step("Выбор опции планировки", () -> {
+                layoutsPage.chooseLayoutOption();
             });
 
-            step("Переход в модуль ОПР", () -> {
-                step("Нажать на кнопку передать вариант в модуль", () -> {
-                    layoutPage.clickButtonNextModule();
-                });
-                step("Выбрать ОПР", () -> {
-                    layoutPage.clickButtonSpacePlanning();
-                });
-                step("Проверить, что мы находимся в модуле ОПР", () -> {spaceplanningPage.checkSpacePlanningTitle();});
+            step("Выбор топологии: " + topologies, () -> {
+                topologiesPage.chooseTopologiess(topologies);
             });
 
-            step("Переход в модуль АР", () -> {
-                step("Нажать на кнопку передать вариант в модуль", () -> {
-                    spaceplanningPage.clickButtonNextModule();
-                });
-                step("Выбрать АР", () -> {
-                    spaceplanningPage.clickButtonArchitecture();
-                });
-                step("Проверить, что мы находимся в модуле АР", () -> {architecturePage.checkArchitectureTitle();});
+            step("Выбор набора квартир ", () -> {
+                topologiesTreePage.chooseVariantApartment(variantsApartment);
             });
 
-            step("Переход в модуль КР", () -> {
-                step("Нажать на кнопку передать вариант в модуль", () -> {
-                    architecturePage.clickButtonNextModule();
-                });
-                step("Выбрать КР", () -> {
-                    architecturePage.clickButtonStructure();
-                });
-                step("Нажать кнопку Сгенерировать", () -> {
-                    structurePage.clickButtonGeneration();
-                });
-                step("Выбрать вариант", () -> {
-                    structurePage.clickVariant();
-                });
-                step("Нажать на кнопку просмотр варианта", () -> {
-                    structurePage.clickButtonViewVariant();
-                });
-                step("Проверить, что мы находимся в модуле КР", () -> {structurePage.checkStructureTitle();});
-                step("Скачать OМ-КР",()->{
-                    step("Скачиваем файл ОМ-КР", Attach::getOm);
-                });
+            step("Выбор варианта расположения квартир ", () -> {
+                topologiesTreePage.chooseLocationVariantApartment();
             });
 
-            step("Переход в модуль АР2", () -> {
-                step("Нажать на кнопку передать вариант в модуль", () -> {
-                    structurePage.clickButtonNextModule();
-                });
-                step("Выбрать АР2", () -> {
-                    structurePage.clickButtonArchitectureTwo();
-                });
-                step("Проверить, что мы находимся в модуле АР", () -> {
-                    architectureTwoPage.checkArchitectureTwoTitle();}
-                );
-                step("Скачать OМ-АР2", Attach::getOm);
+            step("Выбор доступных вариантов расположения квартир ", () -> {
+                topologiesTreePage.chooseVariants(variants);
             });
 
-            step("Переход в модуль HVAC", () -> {
-                step("Нажать на кнопку передать вариант в модуль", () -> {
-                    architectureTwoPage.clickButtonNextModule();
-                });
-                step("Нажать на кнопку передать вариант в модуль", () -> {
-                    architectureTwoPage.clickButtonHvac();
-                });
-                step("Проверяем, что мы находимся в модуле HVAC", () -> {
-                    hvacPage.checkHvacTitle();
-                });
-                step("Скачать OМ-HVAC", Attach::getOm);
-                step("Проверяем, что нет ошибок", () -> {
-                    hvacPage.assertNoErrorDialogPresent();
-                });
+            step("Нажать на кнопку 'Просмотр варианта' ", () -> {
+                topologiesTreePage.clickButtonViewVariant();
             });
-        }
+        });
+
+        step("Переход в модуль ОПР", () -> {
+            step("Нажать на кнопку передать вариант в модуль", () -> {
+                layoutPage.clickButtonNextModule();
+            });
+            step("Выбрать ОПР", () -> {
+                layoutPage.clickButtonSpacePlanning();
+            });
+            step("Проверить, что мы находимся в модуле ОПР", () -> {spaceplanningPage.checkSpacePlanningTitle();});
+        });
+
+        step("Переход в модуль АР", () -> {
+            step("Нажать на кнопку передать вариант в модуль", () -> {
+                spaceplanningPage.clickButtonNextModule();
+            });
+            step("Выбрать АР", () -> {
+                spaceplanningPage.clickButtonArchitecture();
+            });
+            step("Проверить, что мы находимся в модуле АР", () -> {architecturePage.checkArchitectureTitle();});
+        });
+
+        step("Переход в модуль КР", () -> {
+            step("Нажать на кнопку передать вариант в модуль", () -> {
+                architecturePage.clickButtonNextModule();
+            });
+            step("Выбрать КР", () -> {
+                architecturePage.clickButtonStructure();
+            });
+            step("Нажать кнопку Сгенерировать", () -> {
+                structurePage.clickButtonGeneration();
+            });
+            step("Выбрать вариант", () -> {
+                structurePage.clickVariant();
+            });
+            step("Нажать на кнопку просмотр варианта", () -> {
+                structurePage.clickButtonViewVariant();
+            });
+            step("Проверить, что мы находимся в модуле КР", () -> {structurePage.checkStructureTitle();});
+            step("Скачать OМ-КР",()->{
+                step("Скачиваем файл ОМ-КР", Attach::getOm);
+            });
+        });
+
+        step("Переход в модуль АР2", () -> {
+            step("Нажать на кнопку передать вариант в модуль", () -> {
+                structurePage.clickButtonNextModule();
+            });
+            step("Выбрать АР2", () -> {
+                structurePage.clickButtonArchitectureTwo();
+            });
+            step("Проверить, что мы находимся в модуле АР", () -> {
+                architectureTwoPage.checkArchitectureTwoTitle();}
+            );
+            step("Скачать OМ-АР2", Attach::getOm);
+        });
+
+        step("Переход в модуль HVAC", () -> {
+            step("Нажать на кнопку передать вариант в модуль", () -> {
+                architectureTwoPage.clickButtonNextModule();
+            });
+            step("Нажать на кнопку передать вариант в модуль", () -> {
+                architectureTwoPage.clickButtonHvac();
+            });
+            step("Проверяем, что мы находимся в модуле HVAC", () -> {
+                hvacPage.checkHvacTitle();
+            });
+            step("Скачать OМ-HVAC", Attach::getOm);
+            step("Проверяем, что нет ошибок", () -> {
+                hvacPage.assertNoErrorDialogPresent();
+            });
+        });
     }
 }
