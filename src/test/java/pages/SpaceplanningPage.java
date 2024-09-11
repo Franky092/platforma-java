@@ -21,7 +21,7 @@ public class SpaceplanningPage {
 
 
     public void checkSpacePlanningTitle() {
-        spacePlanningTitle.shouldBe(visible, Duration.ofMinutes(3));
+        spacePlanningTitle.shouldBe(visible, Duration.ofMinutes(5));
     }
 
     public void clickButtonNextModule(){

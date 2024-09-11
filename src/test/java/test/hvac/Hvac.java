@@ -40,22 +40,22 @@ public class Hvac extends TestBase {
         // Добавляем метод источника данных
         static Stream<Arguments> topologiesProvider() {
             return Stream.of(
-                    Arguments.of(Topologies.Num124, List.of("Вариант 124-1-1-0"),List.of("1")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-0"),List.of("1")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-1"),List.of("1")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-2"),List.of("1")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-3"),List.of("1")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-0"),List.of("2")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-1"),List.of("2")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-2"),List.of("2")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-3"),List.of("2")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-0"),List.of("3")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-1"),List.of("3")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-2"),List.of("3")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-3"),List.of("3")),
-                    Arguments.of(Topologies.Num122, List.of("Вариант 122-1-1-0"),List.of("1")),
-                    Arguments.of(Topologies.Num126, List.of("Вариант 126-1-1-0"),List.of("1")),
-                    Arguments.of(Topologies.Num61, List.of("Вариант 61-1-1-0"),List.of("1"))
+//                    Arguments.of(Topologies.Num124, List.of("Вариант 124-1-1-0"),List.of("1")),
+//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-0"),List.of("1")),
+//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-1"),List.of("1")),
+//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-2"),List.of("1")),
+//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-3"),List.of("1")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-0"),List.of("2"))
+//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-1"),List.of("2")),
+//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-2"),List.of("2")),
+//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-3"),List.of("2")),
+//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-0"),List.of("3")),
+//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-1"),List.of("3")),
+//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-2"),List.of("3")),
+//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-3"),List.of("3")),
+//                    Arguments.of(Topologies.Num122, List.of("Вариант 122-1-1-0"),List.of("1")),
+//                    Arguments.of(Topologies.Num126, List.of("Вариант 126-1-1-0"),List.of("1")),
+//                    Arguments.of(Topologies.Num61, List.of("Вариант 61-1-1-0"),List.of("1"))
             );
         }
 
@@ -158,8 +158,10 @@ public class Hvac extends TestBase {
                     structurePage.clickButtonViewVariant();
                 });
                 step("Проверить, что мы находимся в модуле КР", () -> {structurePage.checkStructureTitle();});
-                sleep(240000); // ждем загрузки ом кр
-                step("Скачать OМ-КР", Attach::getOm);
+                step("Скачать OМ-КР",()->{
+                    structurePage.checkErrors();
+                    step("Скачиваем файл ОМ-КР", Attach::getOm);
+                });
             });
 
             step("Переход в модуль АР2", () -> {

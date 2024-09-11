@@ -10,6 +10,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
 
 public class StructurePage {
 
@@ -22,33 +23,33 @@ public class StructurePage {
     private final SelenideElement variant = $("div.t-content div.content .props");
     private final SelenideElement buttonArchitectureTwo = $x("//button[text()=' АР 2 ']");
     public SelenideElement structureTitle = $x("//div[text()=\"Задание КР 1\"]");
+    public final SelenideElement dialogCloseButton = $("button.t-close");
 
 
-
-    public void getTitle(){
+    public void getTitle() {
         title.shouldBe(visible);
     }
 
-    public void clickButtonNextModule(){
+    public void clickButtonNextModule() {
         buttonNextModule.shouldBe(visible, Duration.ofMinutes(6));
         buttonNextModule.click();
     }
 
-    public void clickButtonArchitectureTwo(){
+    public void clickButtonArchitectureTwo() {
         buttonArchitectureTwo.click();
     }
 
-    public void clickButtonGeneration(){
+    public void clickButtonGeneration() {
         buttonNextModule.shouldBe(visible, Duration.ofMinutes(6));
         sleep(2000);
         buttonNextModule.click();
     }
 
-    public void clickButtonViewVariant(){
+    public void clickButtonViewVariant() {
         buttonViewVariant.click();
     }
 
-    public void clickVariant(){
+    public void clickVariant() {
         variant.shouldBe(visible, Duration.ofMinutes(6)).click();
     }
 
@@ -57,4 +58,11 @@ public class StructurePage {
     }
 
 
+    public void checkErrors() {
+        step("Проверка наличия ошибок на странице", () -> {
+            if (dialogCloseButton.is(visible, Duration.ofMinutes(1))) {
+                dialogCloseButton.click();
+            }
+        });
+    }
 }

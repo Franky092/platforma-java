@@ -5,6 +5,7 @@ import com.codeborne.selenide.*;
 import com.codeborne.selenide.conditions.Visible;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
+import jdk.dynalink.beans.StaticClass;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -16,36 +17,50 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+
+import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.FileDownloadMode.FOLDER;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.logging.LogType.BROWSER;
 
 
-
 public class Attach {
     private static final SelenideElement om = $x("//div[text()='Объектная модель']");
+    private static final SelenideElement pngs = $("[id*=downloadButton]");
     private static final SelenideElement diagnisticFloor = $x("//div[text()='Диагностический IFC (Этаж)']");
     private static final SelenideElement diagnisticFloors = $x("//div[text()='Диагностический IFC (Здание)']");
-
-
+    public static SelenideElement tuidialog = $("h3");
+    public static SelenideElement tuidialogclose = $("button.t-close");
+    static int retryCount = 0;
+    static int maxRetries = 4;
+    static boolean fileDownloaded = false;
 
     public static void getOm() throws FileNotFoundException {
-        File report = om.download(DownloadOptions.using(FOLDER).withTimeout(60000));
-//        String fileName = report.getName();
-//        InputStream reportStream = new FileInputStream(report);
-        Allure.addAttachment(report.getName(),"application/octet-stream", new FileInputStream(report), "json");
-
-
+        while (!fileDownloaded && retryCount < maxRetries) {
+            try {
+                File report = om.download(DownloadOptions.using(FOLDER).withTimeout(60000));
+                Allure.addAttachment(report.getName(), "application/octet-stream", new FileInputStream(report), "json");
+                fileDownloaded = true;
+            } catch (Error e) {
+                System.out.println("Can't download");
+            }
+            retryCount++;
+            if (retryCount >= maxRetries) {
+                throw new RuntimeException("EROOOOOOOOOOOOOOOOOOR");
+            }
+        }
     }
-    public static void  getFloorIfc() throws FileNotFoundException {
+
+    public static void getFloorIfc() throws FileNotFoundException {
         File report = diagnisticFloor.download(DownloadOptions.using(FOLDER).withTimeout(60000));
-        Allure.addAttachment(report.getName(),"application/octet-stream", new FileInputStream(report), "json");
+        Allure.addAttachment(report.getName(), "application/octet-stream", new FileInputStream(report), "json");
     }
 
-    public static void  getFloorsIfc() throws FileNotFoundException {
+    public static void getFloorsIfc() throws FileNotFoundException {
         File report = diagnisticFloors.download(DownloadOptions.using(FOLDER).withTimeout(60000));
-        Allure.addAttachment(report.getName(),"application/octet-stream", new FileInputStream(report), "json");
+        Allure.addAttachment(report.getName(), "application/octet-stream", new FileInputStream(report), "json");
     }
 
     @Attachment(value = "URL", type = "text/uri-list")
@@ -84,7 +99,6 @@ public class Attach {
 
     public static URL getVideoUrl() {
         String videoUrl = "http://127.0.0.1:4444/video/" + sessionId() + ".mp4";
-
         try {
             return new URL(videoUrl);
         } catch (MalformedURLException e) {

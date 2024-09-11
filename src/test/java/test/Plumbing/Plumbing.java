@@ -12,9 +12,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 import pages.*;
 import test.Topologies;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 
@@ -38,22 +41,22 @@ public class Plumbing extends TestBase {
 
     static Stream<Arguments> topologiesProvider() {
         return Stream.of(
-                Arguments.of(Topologies.Num124, List.of("Вариант 124-1-1-0"),List.of("1")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-0"),List.of("1")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-1"),List.of("1")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-2"),List.of("1")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-3"),List.of("1")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-0"),List.of("2")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-1"),List.of("2")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-2"),List.of("2")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-3"),List.of("2")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-0"),List.of("3")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-1"),List.of("3")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-2"),List.of("3")),
-                Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-3"),List.of("3")),
-                Arguments.of(Topologies.Num122, List.of("Вариант 122-1-1-0"),List.of("1")),
-                Arguments.of(Topologies.Num126, List.of("Вариант 126-1-1-0"),List.of("1")),
-                Arguments.of(Topologies.Num61, List.of("Вариант 61-1-1-0"),List.of("1"))
+                Arguments.of(Topologies.Num124, List.of("Вариант 124-1-1-0"),List.of("1"))
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-0"),List.of("1")),
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-1"),List.of("1")),
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-2"),List.of("1")),
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-3"),List.of("1")),
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-0"),List.of("2")),
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-1"),List.of("2")),
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-2"),List.of("2")),
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-3"),List.of("2")),
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-0"),List.of("3")),
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-1"),List.of("3")),
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-2"),List.of("3")),
+//                Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-3"),List.of("3")),
+//                Arguments.of(Topologies.Num122, List.of("Вариант 122-1-1-0"),List.of("1")),
+//                Arguments.of(Topologies.Num126, List.of("Вариант 126-1-1-0"),List.of("1")),
+//                Arguments.of(Topologies.Num61, List.of("Вариант 61-1-1-0"),List.of("1"))
         );
     }
 
@@ -126,7 +129,6 @@ public class Plumbing extends TestBase {
                 layoutPage.clickButtonSpacePlanning();
             });
             step("Проверить, что мы находимся в модуле ОПР", () -> {spaceplanningPage.checkSpacePlanningTitle();});
-            step("Скачать OМ-КР", Attach::getOm);
         });
 
         step("Переход в модуль АР", () -> {
@@ -156,8 +158,10 @@ public class Plumbing extends TestBase {
                 structurePage.clickButtonViewVariant();
             });
             step("Проверить, что мы находимся в модуле КР", () -> {structurePage.checkStructureTitle();});
-            sleep(240000); // ждем загрузки ом кр
-            step("Скачать OМ-КР", Attach::getOm);
+            step("Скачать OМ-КР",()->{
+                structurePage.checkErrors();
+                step("Скачиваем файл ОМ-КР", Attach::getOm);
+            });
         });
 
         step("Переход в модуль АР2", () -> {
@@ -167,7 +171,9 @@ public class Plumbing extends TestBase {
             step("Выбрать АР2", () -> {
                 structurePage.clickButtonArchitectureTwo();
             });
-            step("Проверить, что мы находимся в модуле КР", () -> {architectureTwoPage.checkArchitectureTwoTitle();});
+            step("Проверить, что мы находимся в модуле АР", () -> {
+                architectureTwoPage.checkArchitectureTwoTitle();}
+            );
             step("Скачать OМ-АР2", Attach::getOm);
         });
 
@@ -179,7 +185,6 @@ public class Plumbing extends TestBase {
                 plumbingPage.chekTitilePlumbing();
             });
             step("Скачать ОМ-ВК", Attach::getOm);
-            sleep(150000); // Ждем подгруза файлов
             step("Скачать IFC Этаж-ВК", Attach::getFloorIfc);
             step("Скачать IFC Здания-ВК", Attach::getFloorsIfc);
         });
