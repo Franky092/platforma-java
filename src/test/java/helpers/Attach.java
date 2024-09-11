@@ -34,7 +34,7 @@ public class Attach {
     public static SelenideElement tuidialog = $("h3");
     public static SelenideElement tuidialogclose = $("button.t-close");
     static int retryCount = 0;
-    static int maxRetries = 4;
+    static int maxRetries = 5;
     static boolean fileDownloaded = false;
 
     public static void getOm() throws FileNotFoundException {

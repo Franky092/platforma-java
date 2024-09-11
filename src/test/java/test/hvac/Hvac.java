@@ -40,22 +40,22 @@ public class Hvac extends TestBase {
         // Добавляем метод источника данных
         static Stream<Arguments> topologiesProvider() {
             return Stream.of(
-//                    Arguments.of(Topologies.Num124, List.of("Вариант 124-1-1-0"),List.of("1")),
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-0"),List.of("1")),
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-1"),List.of("1")),
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-2"),List.of("1")),
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-3"),List.of("1")),
-                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-0"),List.of("2"))
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-1"),List.of("2")),
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-2"),List.of("2")),
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-3"),List.of("2")),
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-0"),List.of("3")),
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-1"),List.of("3")),
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-2"),List.of("3")),
-//                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-3"),List.of("3")),
-//                    Arguments.of(Topologies.Num122, List.of("Вариант 122-1-1-0"),List.of("1")),
-//                    Arguments.of(Topologies.Num126, List.of("Вариант 126-1-1-0"),List.of("1")),
-//                    Arguments.of(Topologies.Num61, List.of("Вариант 61-1-1-0"),List.of("1"))
+                    Arguments.of(Topologies.Num124, List.of("Вариант 124-1-1-0"),List.of("1")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-0"),List.of("1")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-1"),List.of("1")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-2"),List.of("1")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-1-1-3"),List.of("1")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-0"),List.of("2")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-1"),List.of("2")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-2"),List.of("2")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-2-1-3"),List.of("2")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-0"),List.of("3")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-1"),List.of("3")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-2"),List.of("3")),
+                    Arguments.of(Topologies.Num128, List.of("Вариант 128-3-1-3"),List.of("3")),
+                    Arguments.of(Topologies.Num122, List.of("Вариант 122-1-1-0"),List.of("1")),
+                    Arguments.of(Topologies.Num126, List.of("Вариант 126-1-1-0"),List.of("1")),
+                    Arguments.of(Topologies.Num61, List.of("Вариант 61-1-1-0"),List.of("1"))
             );
         }
 
@@ -91,34 +91,34 @@ public class Hvac extends TestBase {
             });
 
             step ("Переход к модулю КЗ", () -> {
-                        step("Выбор планировки", () -> {
-                            projectPage.chooseLayout();
-                        });
+                step("Выбор планировки", () -> {
+                    projectPage.chooseLayout();
+                });
 
-                        step("Выбор опции планировки", () -> {
-                            layoutsPage.chooseLayoutOption();
-                        });
+                step("Выбор опции планировки", () -> {
+                    layoutsPage.chooseLayoutOption();
+                });
 
-                        step("Выбор топологии: " + topologies, () -> {
-                            topologiesPage.chooseTopologiess(topologies);
-                        });
+                step("Выбор топологии: " + topologies, () -> {
+                    topologiesPage.chooseTopologiess(topologies);
+                });
 
-                        step("Выбор набора квартир ", () -> {
-                            topologiesTreePage.chooseVariantApartment(variantsApartment);
-                        });
+                step("Выбор набора квартир ", () -> {
+                    topologiesTreePage.chooseVariantApartment(variantsApartment);
+                });
 
-                        step("Выбор варианта расположения квартир ", () -> {
-                            topologiesTreePage.chooseLocationVariantApartment();
-                        });
+                step("Выбор варианта расположения квартир ", () -> {
+                    topologiesTreePage.chooseLocationVariantApartment();
+                });
 
-                        step("Выбор доступных вариантов расположения квартир ", () -> {
-                            topologiesTreePage.chooseVariants(variants);
-                        });
+                step("Выбор доступных вариантов расположения квартир ", () -> {
+                    topologiesTreePage.chooseVariants(variants);
+                });
 
-                        step("Нажать на кнопку 'Просмотр варианта' ", () -> {
-                            topologiesTreePage.clickButtonViewVariant();
-                        });
-                    });
+                step("Нажать на кнопку 'Просмотр варианта' ", () -> {
+                    topologiesTreePage.clickButtonViewVariant();
+                });
+            });
 
             step("Переход в модуль ОПР", () -> {
                 step("Нажать на кнопку передать вариант в модуль", () -> {
@@ -128,7 +128,6 @@ public class Hvac extends TestBase {
                     layoutPage.clickButtonSpacePlanning();
                 });
                 step("Проверить, что мы находимся в модуле ОПР", () -> {spaceplanningPage.checkSpacePlanningTitle();});
-                step("Скачать OМ-КР", Attach::getOm);
             });
 
             step("Переход в модуль АР", () -> {
@@ -171,7 +170,9 @@ public class Hvac extends TestBase {
                 step("Выбрать АР2", () -> {
                     structurePage.clickButtonArchitectureTwo();
                 });
-                step("Проверить, что мы находимся в модуле КР", () -> {architectureTwoPage.checkArchitectureTwoTitle();});
+                step("Проверить, что мы находимся в модуле АР", () -> {
+                    architectureTwoPage.checkArchitectureTwoTitle();}
+                );
                 step("Скачать OМ-АР2", Attach::getOm);
             });
 
