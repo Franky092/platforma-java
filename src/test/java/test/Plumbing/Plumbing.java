@@ -62,7 +62,7 @@ public class Plumbing extends TestBase {
 
     @Owner("Maksim Sidelnikov")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Проход до HVAC")
+    @DisplayName("Проход до PLUMBING")
     @ParameterizedTest(name = "на Мопе {0} и {1}")
     @MethodSource("topologiesProvider")
     void goToPlumbing(Topologies topologies, List<String> variants, List<String> variantsApartment) {

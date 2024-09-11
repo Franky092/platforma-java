@@ -19,20 +19,13 @@ public class TestBase {
     public static WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
 
     @BeforeEach
-     void openPage() {
+     void SetUp() {
+        WebDriver.configure();
+        SelenideLogger.addListener("allure", new AllureSelenide());
         step("Открыть главную страницу 'platforma'", () ->
                 open(config.getBaseUrl()));
     }
 
-    @BeforeAll
-    static void driverConfigure() {
-        WebDriver.configure();
-    }
-
-    @BeforeEach
-    void addListener() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-    }
 
     @AfterEach
     void tearDown() {
