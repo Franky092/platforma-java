@@ -15,6 +15,7 @@ import test.Topologies;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 
 public class Hvac extends TestBase {
@@ -117,65 +118,65 @@ public class Hvac extends TestBase {
                         step("Нажать на кнопку 'Просмотр варианта' ", () -> {
                             topologiesTreePage.clickButtonViewVariant();
                         });
-
-                        step("Нажать на кнопку передать вариант в модуль", () -> {
-                            layoutPage.clickButtonNextModule();
-                        });
                     });
 
             step("Переход в модуль ОПР", () -> {
+                step("Нажать на кнопку передать вариант в модуль", () -> {
+                    layoutPage.clickButtonNextModule();
+                });
                 step("Выбрать ОПР", () -> {
                     layoutPage.clickButtonSpacePlanning();
                 });
                 step("Проверить, что мы находимся в модуле ОПР", () -> {spaceplanningPage.checkSpacePlanningTitle();});
                 step("Скачать OМ-КР", Attach::getOm);
-                step("Нажать на кнопку передать вариант в модуль", () -> {
-                    spaceplanningPage.clickButtonNextModule();
-                });
             });
 
             step("Переход в модуль АР", () -> {
-                        step("Выбрать АР", () -> {
-                            spaceplanningPage.clickButtonArchitecture();
-                        });
+                step("Нажать на кнопку передать вариант в модуль", () -> {
+                    spaceplanningPage.clickButtonNextModule();
+                });
+                step("Выбрать АР", () -> {
+                    spaceplanningPage.clickButtonArchitecture();
+                });
                 step("Проверить, что мы находимся в модуле АР", () -> {architecturePage.checkArchitectureTitle();});
-                        step("Нажать на кнопку передать вариант в модуль", () -> {
-                            architecturePage.clickButtonNextModule();
-                        });
-                    });
+            });
 
             step("Переход в модуль КР", () -> {
-                        step("Выбрать КР", () -> {
-                            architecturePage.clickButtonStructure();
-                        });
-                        step("Нажать кнопку Сгенерировать", () -> {
-                            structurePage.clickButtonGeneration();
-                        });
-                        step("Выбрать вариант", () -> {
-                            structurePage.clickVariant();
-                        });
-                        step("Нажать на кнопку просмотр варианта", () -> {
-                            structurePage.clickButtonViewVariant();
-                        });
-                        step("Проверить, что мы находимся в модуле КР", () -> {structurePage.checkStructureTitle();});
-                        step("Скачать OМ-КР", Attach::getOm);
-                        step("Нажать на кнопку передать вариант в модуль", () -> {
-                            structurePage.clickButtonNextModule();
-                        });
-                    });
+                step("Нажать на кнопку передать вариант в модуль", () -> {
+                    architecturePage.clickButtonNextModule();
+                });
+                step("Выбрать КР", () -> {
+                    architecturePage.clickButtonStructure();
+                });
+                step("Нажать кнопку Сгенерировать", () -> {
+                    structurePage.clickButtonGeneration();
+                });
+                step("Выбрать вариант", () -> {
+                    structurePage.clickVariant();
+                });
+                step("Нажать на кнопку просмотр варианта", () -> {
+                    structurePage.clickButtonViewVariant();
+                });
+                step("Проверить, что мы находимся в модуле КР", () -> {structurePage.checkStructureTitle();});
+                sleep(120000); // ждем загрузки ом кр
+                step("Скачать OМ-КР", Attach::getOm);
+            });
 
             step("Переход в модуль АР2", () -> {
-                        step("Выбрать АР2", () -> {
-                            structurePage.clickButtonArchitectureTwo();
-                        });
-                        step("Проверить, что мы находимся в модуле КР", () -> {architectureTwoPage.checkArchitectureTwoTitle();});
-                        step("Скачать OМ-АР2", Attach::getOm);
-                        step("Нажать на кнопку передать вариант в модуль", () -> {
-                            architectureTwoPage.clickButtonNextModule();
-                        });
-                    });
+                step("Нажать на кнопку передать вариант в модуль", () -> {
+                    structurePage.clickButtonNextModule();
+                });
+                step("Выбрать АР2", () -> {
+                    structurePage.clickButtonArchitectureTwo();
+                });
+                step("Проверить, что мы находимся в модуле КР", () -> {architectureTwoPage.checkArchitectureTwoTitle();});
+                step("Скачать OМ-АР2", Attach::getOm);
+            });
 
             step("Переход в модуль HVAC", () -> {
+                step("Нажать на кнопку передать вариант в модуль", () -> {
+                    architectureTwoPage.clickButtonNextModule();
+                });
                 step("Нажать на кнопку передать вариант в модуль", () -> {
                     architectureTwoPage.clickButtonHvac();
                 });

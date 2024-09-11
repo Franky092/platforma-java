@@ -15,6 +15,7 @@ import test.Topologies;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 
 public class Plumbing extends TestBase {
@@ -115,34 +116,33 @@ public class Plumbing extends TestBase {
             step("Нажать на кнопку 'Просмотр варианта' ", () -> {
                 topologiesTreePage.clickButtonViewVariant();
             });
-
-            step("Нажать на кнопку передать вариант в модуль", () -> {
-                layoutPage.clickButtonNextModule();
-            });
         });
 
         step("Переход в модуль ОПР", () -> {
+            step("Нажать на кнопку передать вариант в модуль", () -> {
+                layoutPage.clickButtonNextModule();
+            });
             step("Выбрать ОПР", () -> {
                 layoutPage.clickButtonSpacePlanning();
             });
             step("Проверить, что мы находимся в модуле ОПР", () -> {spaceplanningPage.checkSpacePlanningTitle();});
             step("Скачать OМ-КР", Attach::getOm);
-            step("Нажать на кнопку передать вариант в модуль", () -> {
-                spaceplanningPage.clickButtonNextModule();
-            });
         });
 
         step("Переход в модуль АР", () -> {
+            step("Нажать на кнопку передать вариант в модуль", () -> {
+                spaceplanningPage.clickButtonNextModule();
+            });
             step("Выбрать АР", () -> {
                 spaceplanningPage.clickButtonArchitecture();
             });
             step("Проверить, что мы находимся в модуле АР", () -> {architecturePage.checkArchitectureTitle();});
-            step("Нажать на кнопку передать вариант в модуль", () -> {
-                architecturePage.clickButtonNextModule();
-            });
         });
 
         step("Переход в модуль КР", () -> {
+            step("Нажать на кнопку передать вариант в модуль", () -> {
+                architecturePage.clickButtonNextModule();
+            });
             step("Выбрать КР", () -> {
                 architecturePage.clickButtonStructure();
             });
@@ -156,31 +156,32 @@ public class Plumbing extends TestBase {
                 structurePage.clickButtonViewVariant();
             });
             step("Проверить, что мы находимся в модуле КР", () -> {structurePage.checkStructureTitle();});
+            sleep(120000); // ждем загрузки ом кр
             step("Скачать OМ-КР", Attach::getOm);
-            step("Нажать на кнопку передать вариант в модуль", () -> {
-                structurePage.clickButtonNextModule();
-            });
         });
 
         step("Переход в модуль АР2", () -> {
+            step("Нажать на кнопку передать вариант в модуль", () -> {
+                structurePage.clickButtonNextModule();
+            });
             step("Выбрать АР2", () -> {
                 structurePage.clickButtonArchitectureTwo();
             });
             step("Проверить, что мы находимся в модуле КР", () -> {architectureTwoPage.checkArchitectureTwoTitle();});
             step("Скачать OМ-АР2", Attach::getOm);
+        });
+
+        step("Проверка модуля ВК", () -> {
             step("Нажать на кнопку передать вариант в модуль", () -> {
                 architectureTwoPage.clickButtonNextModule();
             });
-            step("Переход в модуль ВК", () -> {
-                architectureTwoPage.clickButtonPlumbing();
-            });
-        });
-        step("Проверка модуля ВК", () -> {
             step("Проверить, что мы находимся в модуле ВК", () -> {
                 plumbingPage.chekTitilePlumbing();
             });
             step("Скачать ОМ-ВК", Attach::getOm);
-            step("Скачать IFC Здания-ВК", Attach::getFloorIfc);
+            sleep(150000); // Ждем подгруза файлов
+            step("Скачать IFC Этаж-ВК", Attach::getFloorIfc);
+            step("Скачать IFC Здания-ВК", Attach::getFloorsIfc);
         });
     }
 }

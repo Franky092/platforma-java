@@ -32,14 +32,19 @@ public class Attach {
 
     public static void getOm() throws FileNotFoundException {
         File report = om.download(DownloadOptions.using(FOLDER).withTimeout(60000));
-        String fileName = report.getName();
-        InputStream reportStream = new FileInputStream(report);
+//        String fileName = report.getName();
+//        InputStream reportStream = new FileInputStream(report);
         Allure.addAttachment(report.getName(),"application/octet-stream", new FileInputStream(report), "json");
 
 
     }
     public static void  getFloorIfc() throws FileNotFoundException {
         File report = diagnisticFloor.download(DownloadOptions.using(FOLDER).withTimeout(60000));
+        Allure.addAttachment(report.getName(),"application/octet-stream", new FileInputStream(report), "json");
+    }
+
+    public static void  getFloorsIfc() throws FileNotFoundException {
+        File report = diagnisticFloors.download(DownloadOptions.using(FOLDER).withTimeout(60000));
         Allure.addAttachment(report.getName(),"application/octet-stream", new FileInputStream(report), "json");
     }
 
