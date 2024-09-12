@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'io.qameta.allure' version '2.9.3'
+    id("org.gradle.test-retry") version "1.6.0"
+
 }
 
 group 'com.example'
@@ -9,6 +11,8 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+
+
 
 def allureVersion = '2.29.0'
 
@@ -39,9 +43,13 @@ test {
     useJUnitPlatform()
 
     systemProperties System.getProperties()
-
+    retry {
+        maxRetries = 2
+        maxFailures = 20
+        failOnPassedAfterRetry = true
+        failOnSkippedAfterRetry = true
+    }
     if (System.getProperty("threads") != null) {
-        int parallelism = System.getProperty("threads").toInteger()
 
         systemProperties.putAll([
                 'junit.jupiter.execution.parallel.enabled'                 : true,
