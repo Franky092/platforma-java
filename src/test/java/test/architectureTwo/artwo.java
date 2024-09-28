@@ -18,6 +18,8 @@ import java.util.stream.Stream;
 
 import static io.qameta.allure.Allure.step;
 
+
+//1123
 public class artwo extends TestBase {
     AuthPage authPage = new AuthPage();
     PortfolioPage portfolioPage = new PortfolioPage();
