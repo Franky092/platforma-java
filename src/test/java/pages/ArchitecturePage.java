@@ -19,6 +19,10 @@ public class ArchitecturePage {
     public SelenideElement architectureTitle3 = $x("//div[text()=\"Вариант АР\"]");
     public SelenideElement architectureTitle4 = $x("//div[text()=\"Вариант АР\"]");
     public SelenideElement architectureTitle5 = $x("//div[text()=\"Вариант АР\"]");
+    public SelenideElement architectureTitle6 = $x("//div[text()=\"Вариант АР\"]");
+    public SelenideElement architectureTitle7 = $x("//div[text()=\"Вариант АР\"]");
+    public SelenideElement architectureTitle8 = $x("//div[text()=\"Вариант АР\"]");
+    public SelenideElement architectureTitle9 = $x("//div[text()=\"Вариант АР\"]");
 
 
     public void getTitle(){
