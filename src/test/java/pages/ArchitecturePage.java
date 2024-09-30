@@ -15,6 +15,10 @@ public class ArchitecturePage {
     private final SelenideElement buttonNextModule = $("div[data-appearance='primary'] span");
     private final SelenideElement buttonStructure = $x("//button[text()=' КР ']");
     public SelenideElement architectureTitle = $x("//div[text()=\"Вариант АР\"]");
+    public SelenideElement architectureTitle2 = $x("//div[text()=\"Вариант АР\"]");
+    public SelenideElement architectureTitle3 = $x("//div[text()=\"Вариант АР\"]");
+    public SelenideElement architectureTitle4 = $x("//div[text()=\"Вариант АР\"]");
+    public SelenideElement architectureTitle5 = $x("//div[text()=\"Вариант АР\"]");
 
 
     public void getTitle(){
